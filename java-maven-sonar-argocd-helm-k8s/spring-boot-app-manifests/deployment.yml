@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: ndp2435/ultimate-cicd:replaceImageTag
+        image: ndp2435/ultimate-cicd:16
         ports:
         - containerPort: 8080
