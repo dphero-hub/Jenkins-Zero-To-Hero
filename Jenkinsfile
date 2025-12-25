@@ -1,6 +1,7 @@
 pipeline {
   environment{
     sonar_server = "slave.mytechblog.xyz"
+    RELEASE_VERSION = "1.0.${BUILD_NUMBER}"
   }
   agent {
     label 'built-in'
