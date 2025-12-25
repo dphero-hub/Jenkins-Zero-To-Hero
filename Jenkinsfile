@@ -12,6 +12,7 @@ pipeline {
   }
       tools {
         maven 'maven'
+        jdk 'openjdk11'
     }
   stages {
     // stage('Static Code Analysis') {
