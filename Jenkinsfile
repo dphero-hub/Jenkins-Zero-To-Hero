@@ -15,16 +15,16 @@ pipeline {
         jdk 'openjdk11'
     }
   stages {
-    // stage('Static Code Analysis') {
-    //   environment {
-    //     SONAR_URL = "http://${sonar_server}:9000"
-    //   }
-    //   steps {
-    //     withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
-    //       sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName=maven -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-    //     }
-    //   }
-    // }
+    stage('Static Code Analysis') {
+      environment {
+        SONAR_URL = "http://${sonar_server}:9000"
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
+          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName=maven -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        }
+      }
+    }
 
       stage('Build & Deploy') {
           steps {
