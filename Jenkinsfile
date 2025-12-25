@@ -23,14 +23,19 @@ pipeline {
 
         }
         }
-        stage('test the application') {
+        stage('start the application') {
             
                 steps {
                     dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {
-                        sh 'java -jar target/spring-boot-web.jar --server.port=8888'
+                        sh 'nohup java -jar target/spring-boot-web.jar --server.port=8888 > /dev/null 2>&1 &'
                 }
         } 
         }       
-        
+        stage('test the application') {
+            
+                steps {
+                    sh 'curl localhost:8888'
+        } 
+        }            
     }
 }
