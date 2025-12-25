@@ -26,39 +26,22 @@ pipeline {
     //   }
     // }
 
-      // stage('Build & Deploy') {
-      //     steps {
-      //         withCredentials([usernamePassword(
-      //             credentialsId: 'artifactory-admin',
-      //             usernameVariable: 'ARTIFACTORY_USER',
-      //             passwordVariable: 'ARTIFACTORY_PASSWORD'
-      //         )]) {
-      //             configFileProvider([configFile(
-      //                 fileId: 'maven-local',
-      //                 variable: 'MAVEN_SETTINGS'
-      //             )]) {
-      //                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app; mvn clean deploy -Drevision=${RELEASE_VERSION} -s $MAVEN_SETTINGS'
-      //             }
-      //         }
-      //     }
-      // }
       stage('Build & Deploy') {
           steps {
-                script {
-                    def server = Artifactory.server('artifactory')
-
-                    def buildInfo = Artifactory.newBuildInfo()
-                    buildInfo.env.capture = true
-
-                    server.runMaven(
-                        pom: 'pom.xml',
-                        goals: 'clean deploy',
-                        buildInfo: buildInfo
-                    )
-
-                    server.publishBuildInfo(buildInfo)
-                }
+              withCredentials([usernamePassword(
+                  credentialsId: 'artifactory-admin',
+                  usernameVariable: 'ARTIFACTORY_USER',
+                  passwordVariable: 'ARTIFACTORY_PASSWORD'
+              )]) {
+                  configFileProvider([configFile(
+                      fileId: 'maven-local',
+                      variable: 'MAVEN_SETTINGS'
+                  )]) {
+                      sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app; mvn clean deploy -Drevision=${RELEASE_VERSION} -s $MAVEN_SETTINGS'
+                  }
+              }
           }
       }
+
   }
 }
