@@ -86,7 +86,7 @@ pipeline {
                       fileId: 'maven-local',
                       variable: 'MAVEN_SETTINGS'
                   )]) {
-                      sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app; mvn clean deploy -s $MAVEN_SETTINGS'
+                      sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app; mvn clean deploy -Drevision=${RELEASE_VERSION} -s $MAVEN_SETTINGS'
                   }
               }
           }
