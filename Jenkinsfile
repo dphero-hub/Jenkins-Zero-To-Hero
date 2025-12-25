@@ -19,7 +19,7 @@ pipeline {
             }
         }
         }
-        stage('Build the application') {
+        stage('test the application') {
             
                 steps {
                     dir(java-maven-sonar-argocd-helm-k8s/spring-boot-app) {
