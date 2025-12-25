@@ -49,7 +49,7 @@ pipeline {
                   def buildInfo = Artifactory.newBuildInfo()
                   buildInfo.env.capture = true
                   def rtMaven = Artifactory.newMavenBuild()
-                  rtMaven.tool = 'maven3'
+                  rtMaven.tool = 'maven'
                   rtMaven.deployer server: server,
                                    releaseRepo: 'maven-releases',
                                    snapshotRepo: 'maven-snapshots'
