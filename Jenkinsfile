@@ -24,7 +24,7 @@ pipeline {
         stage('test the application') {
             
                 steps {
-                sh 'cd cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && java -jar target/spring-boot-app.jar --server.port=8888'
+                sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && java -jar target/spring-boot-app.jar --server.port=8888'
         } 
         }       
         
