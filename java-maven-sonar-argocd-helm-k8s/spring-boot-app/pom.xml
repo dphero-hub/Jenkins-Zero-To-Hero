@@ -74,6 +74,15 @@
         
         </plugins>
     </build>
-
+<distributionManagement>
+    <snapshotRepository>
+        <id>artifactory-snapshots</id>
+        <url>http://slave.mytechblog.xyz:8082/artifactory/devops/</url>
+    </snapshotRepository>
+    <repository>
+        <id>artifactory-releases</id>
+        <url>http://slave.mytechblog.xyz:8082/artifactory/devops/</url>
+    </repository>
+</distributionManagement>
 
 </project>
