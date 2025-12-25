@@ -12,15 +12,17 @@ pipeline {
 
     stages {  
         stage('Build the application') {
-            dir(java-maven-sonar-argocd-helm-k8s/spring-boot-app){
+           
                 steps {
-                sh 'mvn clean package -DskipTests'
+                 dir(java-maven-sonar-argocd-helm-k8s/spring-boot-app){
+                   sh 'mvn clean package -DskipTests'
             }
         }
         }
         stage('Build the application') {
-            dir(java-maven-sonar-argocd-helm-k8s/spring-boot-app) {
+            
                 steps {
+                    dir(java-maven-sonar-argocd-helm-k8s/spring-boot-app) {
                 sh 'java -jar target/spring-boot-app.jar --server.port=8888'
             }
         } 
