@@ -68,11 +68,27 @@ pipeline {
     //         }
     //     }
     // }
-    stage('deploy') {
-      steps {
-        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean deploy'
-        //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
+    // stage('deploy') {
+    //   // steps {
+    //   //   sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean deploy'
+    //   //   //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
+    //   // }
+    // }
+      stage('Build & Deploy') {
+          steps {
+              withCredentials([usernamePassword(
+                  credentialsId: 'artifactory-admin',
+                  usernameVariable: 'ARTIFACTORY_USER',
+                  passwordVariable: 'ARTIFACTORY_PASSWORD'
+              )]) {
+                  configFileProvider([configFile(
+                      fileId: 'maven-local',
+                      variable: 'MAVEN_SETTINGS'
+                  )]) {
+                      sh 'mvn clean deploy -s $MAVEN_SETTINGS'
+                  }
+              }
+          }
       }
-    }
   }
 }
