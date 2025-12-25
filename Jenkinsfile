@@ -41,23 +41,24 @@ pipeline {
       //         }
       //     }
       // }
-       stage('Build & Deploy') {
-            steps {
-                script {
-                    def server = Artifactory.server('artifactory')
-
-                    def buildInfo = Artifactory.newBuildInfo()
-                    buildInfo.env.capture = true
-
-                    server.runMaven(
-                        pom: 'pom.xml',
-                        goals: 'clean deploy',
-                        buildInfo: buildInfo
-                    )
-
-                    server.publishBuildInfo(buildInfo)
-                }
-            }
-        }
+      stage('Build & Deploy') {
+          steps {
+              script {
+                  def server = Artifactory.server('artifactory')
+                  def buildInfo = Artifactory.newBuildInfo()
+                  buildInfo.env.capture = true
+                  def rtMaven = Artifactory.newMavenBuild()
+                  rtMaven.tool = 'maven3'
+                  rtMaven.deployer server: server,
+                                   releaseRepo: 'maven-releases',
+                                   snapshotRepo: 'maven-snapshots'
+                  rtMaven.run(
+                      pom: 'pom.xml',
+                      goals: 'clean deploy',
+                      buildInfo: buildInfo
+                  )
+                  server.publishBuildInfo(buildInfo)
+              }
+          }
   }
 }
