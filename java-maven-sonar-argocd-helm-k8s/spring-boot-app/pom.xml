@@ -75,10 +75,6 @@
         </plugins>
     </build>
 <distributionManagement>
-    <snapshotRepository>
-        <id>artifactory-snapshots</id>
-        <url>http://slave.mytechblog.xyz:8082/artifactory/maven-snapshots</url>
-    </snapshotRepository>
     <repository>
         <id>artifactory-releases</id>
         <url>http://slave.mytechblog.xyz:8082/artifactory/maven-releases</url>
