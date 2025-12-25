@@ -1,6 +1,6 @@
 pipeline {
   environment{
-    sonar_server = "slave.mytechblog.xyz"
+    sonar_server = "sonar.mytechblog.xyz"
     RELEASE_VERSION = "1.0.${BUILD_NUMBER}"
   }
   agent {
@@ -17,7 +17,7 @@ pipeline {
   stages {
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://${sonar_server}:9000"
+        SONAR_URL = "https://${sonar_server}"
       }
       steps {
         withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
