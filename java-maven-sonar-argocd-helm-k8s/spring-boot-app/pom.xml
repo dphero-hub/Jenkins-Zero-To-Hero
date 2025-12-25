@@ -78,11 +78,11 @@
 <distributionManagement>
     <snapshotRepository>
         <id>artifactory-snapshots</id>
-        <url>http://slave.mytechblog.xyz:8082/artifactory/maven-snapshots</url>
+        <url>https://artifactory.mytechblog.xyz/artifactory/maven-snapshots</url>
     </snapshotRepository>
     <repository>
         <id>artifactory-releases</id>
-        <url>http://slave.mytechblog.xyz:8082/artifactory/maven-releases</url>
+        <url>https://artifactory.mytechblog.xyz/artifactory/maven-releases</url>
     </repository>
 </distributionManagement>
 
