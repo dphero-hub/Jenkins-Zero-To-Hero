@@ -41,7 +41,7 @@ pipeline {
        stage('Build & Deploy') {
             steps {
                 script {
-                    def server = Artifactory.server('artifactory-server')
+                    def server = Artifactory.server('artifactory')
 
                     def buildInfo = Artifactory.newBuildInfo()
                     buildInfo.env.capture = true
